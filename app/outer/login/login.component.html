@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div style="margin-top:20px;">
+                <img style="width:100%;" src="/images/img3.jpg" />
+            </div>
+            
+        </div>
+        <div class="col-md-6">
+            <div class="mlk-center-panel">
+                <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+            
+                    <form #myForm="ngForm"  (ngSubmit)="onSubmit()">
+                        <input    type="text"       name="username"   id="username" placeholder="Username" [(ngModel)]="username" autocomplete="off" class="form form-control" /><br/>
+                        <input    type="password"   name="password"   id="password" placeholder="Password" [(ngModel)]="password" autocomplete="off" class="form form-control" /><br/>
+                        <input    type="checkbox"   name="checkbox"   id="checkbox"                        [(ngModel)]="remember" /> Remember me <br/>
+                        <button   type="submit"     name="submit"     id="submit"   class="btn btn-primary">Login</button>
+                    </form>    
+                    <div>Doesn't have account yet? <a  routerLink="/signup">Signup</a></div>
+                    <div>Problem signing in? <a  routerLink="/forgetpassword">Reset Password</a></div>
+                </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>

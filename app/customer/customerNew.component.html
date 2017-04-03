@@ -1,0 +1,51 @@
+
+<div class="row">
+
+    <div class="col-md-12">
+            
+        <div class="panel panel-default">
+            <div class="panel-heading">Form</div>
+            <div class="panel-body">
+                
+               <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
+                    <div class="form-group">
+                        
+                        <label for="">FirstName</label>
+                        <input type="text" class="form-control"  formControlName="FirstName">
+                        <small [hidden]="myForm.controls.FirstName.valid || (myForm.controls.FirstName.pristine && !submitted)" class="text-danger">
+                                FirstName is required (minimum 5 characters).
+                        </small>
+                        <br/>
+
+                        <label for="">MiddleName</label>
+                        <input type="text" class="form-control" formControlName="MiddleName">
+                        <small [hidden]="myForm.controls.MiddleName.valid || (myForm.controls.MiddleName.pristine && !submitted)" class="text-danger">
+                                MiddleName is required (minimum 5 characters).
+                        </small>
+                        <br/>
+
+                        <label for="">LastName</label>
+                        <input type="text" class="form-control" formControlName="LastName">
+                        <small [hidden]="myForm.controls.LastName.valid || (myForm.controls.LastName.pristine && !submitted)" class="text-danger">
+                                LastName is required (minimum 5 characters).
+                            </small>   
+                        <br/>
+                            
+                        <label for="">Email</label>
+                        <input type="text" class="form-control" formControlName="Email">
+                        <small [hidden]="myForm.controls.Email.valid || (myForm.controls.Email.pristine && !submitted)" class="text-danger">
+                                Email is required (minimum 5 characters).
+                            </small>         
+                        <!--<pre class="margin-20">{{ myForm.controls.name.errors | json }}</pre>-->
+                    </div>
+                    
+                    <button type="submit" class="btn btn-default">Submit</button>
+                   
+                </form>
+                    
+            </div>
+        </div>
+            
+    </div>
+
+</div>

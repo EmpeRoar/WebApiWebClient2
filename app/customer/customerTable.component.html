@@ -1,0 +1,62 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">Customers</div>
+    <div class="panel-body">
+        <div style="margin-bottom:20px;">
+  <div class="row">
+     <div class="col-md-6">
+         <input type="text" [(ngModel)]="searchString" (keyup)="filterResult($event)" placeHolder="Search" class="form-control" />
+     </div>
+     <div class="col-md-6" style="text-align:right">
+         <button type="button" class="btn btn-warning btn-sm">Disable</button>        
+        <a  routerLink="/customers/new" class="btn btn-danger btn-sm">Add New</a>
+     </div>    
+  </div>
+</div>
+  <table class="table ">
+    <thead>
+        <tr>
+            <th><input type="checkbox" /></th>
+            <th *ngFor="let t of theader">{{t.colDisplay}}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of displayData">
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td *ngFor="let t of theader">{{d[t.colName]}}</td>     
+            <td style="text-align:right;">
+                 <a routerLink="/customers/edit{{d['id']}}" class="btn btn-warning btn-sm">Edit</a>
+                 <button type="button" (click)="disable(d['id'])" class="btn btn-danger btn-sm">Disable</button>
+            </td>    
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th *ngFor="let t of theader">{{t.colDisplay}}</th>
+            <th></th>
+        </tr>
+    </tfoot>
+  </table>
+  <div>    
+        <div style="display:inline-block">{{displayStatus}}</div>
+        <div
+        (click)="showPage(ndx + 1)" 
+        style="display:inline-block; margin:5px;" 
+        class="btn btn-success" 
+        *ngFor="let item of totalPages | fill let ndx = index">{{ndx + 1}}</div>
+  </div>
+
+
+   <div>
+    <form  #myForm="ngForm" (ngSubmit)="onSubmit()">
+       <div>
+        <button type="submit" >Submit</button>
+       </div>
+    </form>
+  </div>
+    </div>
+</div>    
