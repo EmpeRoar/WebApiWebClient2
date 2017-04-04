@@ -34,30 +34,27 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
   }
 
   setForms(customer:Customer){
-     
-     this.myForm = this._fb.group({
-            FirstName: [customer.FirstName, [<any>Validators.required, <any>Validators.minLength(5)]],            
-            MiddleName: [customer.MiddleName, [<any>Validators.required, <any>Validators.minLength(5)]],            
-            LastName: [customer.LastName, [<any>Validators.required, <any>Validators.minLength(5)]],            
-            Email: [customer.Email, [<any>Validators.required, <any>Validators.minLength(5)]],            
-        });
-     
-     this.subcribeToFormChanges();
-
+      this.myForm.get('id').setValue(customer.id);
+      this.myForm.get('FirstName').setValue(customer.FirstName);
+      this.myForm.get('MiddleName').setValue(customer.MiddleName);
+      this.myForm.get('LastName').setValue(customer.LastName);
+      this.myForm.get('Email').setValue(customer.Email);
   }
 
   ngOnInit(){
 
-      this.activatedRoute.params.subscribe((params: Params) => {        
+     this.activatedRoute.params.subscribe((params: Params) => {        
          
          this.id = params['id'];        
          this.customerService.getCustomer(this.id).subscribe(
                  customer => this.setForms(customer),                
                  error =>  this.errorMessage = <any>error);   
-      });
 
+      });
      
-      this.myForm = this._fb.group({
+
+      this.myForm = this._fb.group({ 
+            id:[],          
             FirstName: ['', [<any>Validators.required, <any>Validators.minLength(5)]],            
             MiddleName: ['', [<any>Validators.required, <any>Validators.minLength(5)]],            
             LastName: ['', [<any>Validators.required, <any>Validators.minLength(5)]],            
@@ -65,6 +62,10 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         });
         
        this.subcribeToFormChanges();
+
+        
+                 
+     
 
   }    
 
@@ -82,20 +83,11 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
  
   save(model: Customer, isValid: boolean) {
         this.submitted = true;
-        console.log(model, isValid);
+       
 
         if(isValid){
-             
-             let customer = {
-                 id : this.id,
-                 FirstName : model.FirstName,
-                 MiddleName : model.MiddleName,
-                 LastName : model.LastName,
-                 Email : model.Email,
-                 CustomerStatus : model.CustomerStatus,
-                 p : model.p
-             }
-             this.customerService.updateCustomer(customer).subscribe(
+              console.log(model, isValid);
+             this.customerService.updateCustomer(model).subscribe(
                  customer => this.redirectToList(),                
                  error =>  this.errorMessage = <any>error);   
     

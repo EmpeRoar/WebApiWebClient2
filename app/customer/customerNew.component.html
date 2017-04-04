@@ -9,9 +9,9 @@
                 
                <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
                     <div class="form-group">
-                        
+                        <input type="hidden" formControlName="id">
                         <label for="">FirstName</label>
-                        <input type="text" class="form-control"  formControlName="FirstName">
+                        <input type="text" class="form-control"   formControlName="FirstName">
                         <small [hidden]="myForm.controls.FirstName.valid || (myForm.controls.FirstName.pristine && !submitted)" class="text-danger">
                                 FirstName is required (minimum 5 characters).
                         </small>

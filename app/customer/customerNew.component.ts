@@ -24,6 +24,7 @@ export class CustomerNewComponent {
   ngOnInit(){
 
        this.myForm = this._fb.group({
+            id:[],   
             FirstName: ['', [<any>Validators.required, <any>Validators.minLength(5)]],            
             MiddleName: ['', [<any>Validators.required, <any>Validators.minLength(5)]],            
             LastName: ['', [<any>Validators.required, <any>Validators.minLength(5)]],            
@@ -49,7 +50,7 @@ export class CustomerNewComponent {
         console.log(model, isValid);
 
         if(isValid){
-             
+             console.log(model, isValid);
              this.customerService.addCustomer(model).subscribe(
                  customer => this.redirectToList(),                
                  error =>  this.errorMessage = <any>error);   

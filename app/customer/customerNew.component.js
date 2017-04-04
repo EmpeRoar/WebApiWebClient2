@@ -23,6 +23,7 @@ var CustomerNewComponent = (function () {
     }
     CustomerNewComponent.prototype.ngOnInit = function () {
         this.myForm = this._fb.group({
+            id: [],
             FirstName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             MiddleName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             LastName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
@@ -45,6 +46,7 @@ var CustomerNewComponent = (function () {
         this.submitted = true;
         console.log(model, isValid);
         if (isValid) {
+            console.log(model, isValid);
             this.customerService.addCustomer(model).subscribe(function (customer) { return _this.redirectToList(); }, function (error) { return _this.errorMessage = error; });
         }
     };

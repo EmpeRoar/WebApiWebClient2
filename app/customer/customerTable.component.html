@@ -28,7 +28,7 @@
             </td>
             <td *ngFor="let t of theader">{{d[t.colName]}}</td>     
             <td style="text-align:right;">
-                 <a routerLink="/customers/edit{{d['id']}}" class="btn btn-warning btn-sm">Edit</a>
+                 <a routerLink="/customers/edit/{{d['id']}}" class="btn btn-warning btn-sm">Edit</a>
                  <button type="button" (click)="disable(d['id'])" class="btn btn-danger btn-sm">Disable</button>
             </td>    
         </tr>

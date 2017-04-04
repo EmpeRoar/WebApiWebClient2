@@ -26,13 +26,11 @@ var CustomerEditComponent = (function () {
     CustomerEditComponent.prototype.ngOnDestroy = function () {
     };
     CustomerEditComponent.prototype.setForms = function (customer) {
-        this.myForm = this._fb.group({
-            FirstName: [customer.FirstName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            MiddleName: [customer.MiddleName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            LastName: [customer.LastName, [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-            Email: [customer.Email, [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
-        });
-        this.subcribeToFormChanges();
+        this.myForm.get('id').setValue(customer.id);
+        this.myForm.get('FirstName').setValue(customer.FirstName);
+        this.myForm.get('MiddleName').setValue(customer.MiddleName);
+        this.myForm.get('LastName').setValue(customer.LastName);
+        this.myForm.get('Email').setValue(customer.Email);
     };
     CustomerEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -41,6 +39,7 @@ var CustomerEditComponent = (function () {
             _this.customerService.getCustomer(_this.id).subscribe(function (customer) { return _this.setForms(customer); }, function (error) { return _this.errorMessage = error; });
         });
         this.myForm = this._fb.group({
+            id: [],
             FirstName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             MiddleName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
             LastName: ['', [forms_1.Validators.required, forms_1.Validators.minLength(5)]],
@@ -61,18 +60,9 @@ var CustomerEditComponent = (function () {
     CustomerEditComponent.prototype.save = function (model, isValid) {
         var _this = this;
         this.submitted = true;
-        console.log(model, isValid);
         if (isValid) {
-            var customer = {
-                id: this.id,
-                FirstName: model.FirstName,
-                MiddleName: model.MiddleName,
-                LastName: model.LastName,
-                Email: model.Email,
-                CustomerStatus: model.CustomerStatus,
-                p: model.p
-            };
-            this.customerService.updateCustomer(customer).subscribe(function (customer) { return _this.redirectToList(); }, function (error) { return _this.errorMessage = error; });
+            console.log(model, isValid);
+            this.customerService.updateCustomer(model).subscribe(function (customer) { return _this.redirectToList(); }, function (error) { return _this.errorMessage = error; });
         }
     };
     CustomerEditComponent.prototype.onSubmit = function () {
